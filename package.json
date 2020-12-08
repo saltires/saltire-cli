@@ -1,0 +1,44 @@
+{
+  "name": "saltire-cli",
+  "version": "0.0.1",
+  "description": "Scaffolding tool",
+  "keywords": [
+    "scaffolding",
+    "generator",
+    "cli",
+    "typescript",
+    "node"
+  ],
+  "homepage": "https://juejin.cn/user/668105060404104",
+  "bugs": {
+    "url": "https://github.com/saltire-template"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saltire-template"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "saltire",
+    "email": "ye998102@163.com",
+    "url": "https://juejin.cn/user/668105060404104"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": "bin/caz.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "clean": "rimraf lib",
+    "compile": "tsc",
+    "copy": "copyfiles -u 1 \"src/**/*.d.ts\" lib",
+    "build": "run-s clean compile copy",
+  },
+  "engines": {
+    "node": ">=10.17"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
+}
