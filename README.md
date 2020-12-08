@@ -1,0 +1,2 @@
+# saltire-cli
+Scaffolding tool
