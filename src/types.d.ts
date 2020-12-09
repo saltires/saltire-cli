@@ -1,9 +1,11 @@
-// Global types & Module declarations.
-// - [x] Global types for ease of use
-// - [x] ~~Module declarations in order to reduce the devDependencies that need to be installed~~
-// interface Dictionary<T> {
-//   [key: string]: T
-// }
+
+interface AnyObject {
+  [x: string]: any
+}
+
+type AnyArray = any[]
+
+type AnyFunction = (...args: any[]) => any
 
 /**
  * PackageJson declaration type.
@@ -28,26 +30,4 @@ declare module '*/package.json' {
   export const devDependencies: Record<string, string>
   export const engines: { node: string }
 
-  // https://www.typescriptlang.org/docs/handbook/modules.html
-  // interface PackageJson extends Record<string, unknown> {
-  //   name: string
-  //   version: string
-  //   description: string
-  //   keywords: string[]
-  //   homepage: string
-  //   bugs: { url?: string, email?: string }
-  //   repository: { type?: 'git' | 'svn', url?: string }
-  //   license: string
-  //   author: string | { name?: string, email?: string, url?: string }
-  //   main: string
-  //   types: string
-  //   bin: string | Record<string, string>
-  //   files: string[]
-  //   scripts: Record<string, string>
-  //   dependencies: Record<string, string>
-  //   devDependencies: Record<string, string>
-  //   engines: { node: string }
-  // }
-  // const pkg: PackageJson
-  // export default pkg
 }
