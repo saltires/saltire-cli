@@ -130,6 +130,17 @@ export const tildify = (input: string): string => {
 }
 
 /**
+ * @description 判断是否是二进制文件
+ * @return { boolean }
+ */
+export const isBinary = (input: Uint8Array): boolean => {
+    // Detect encoding
+    // 65533 is the unknown char
+    // 8 and below are control chars (e.g. backspace, null, eof, etc)
+    return input.some(item => item === 65533 || item <= 8)
+}
+
+/**
  * @description 将 tilde path 转换为绝对路径，其实就是将 ~ 替换为 os.homedir()
  * @return { String }
  */
