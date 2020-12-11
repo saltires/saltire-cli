@@ -1,6 +1,7 @@
 import path from 'path'
 import crypto from 'crypto'
 import ora from 'ora'
+import chalk from 'chalk'
 import { file, http, config } from '../core'
 import { Context } from './types'
 
@@ -65,6 +66,10 @@ export default async (ctx: Context): Promise<void> => {
     // 当缓存存在时，清除缓存
     exists && await file.remove(ctx.src)
 
+    // 下载模板通常需要几分钟，这里给出提示
+    console.log(chalk.blue(`\n ## 开始为您下载项目模板[${ctx.template}]，这通常需要几分钟的时间!\n`))
+
+    // 开始转圈...
     const spinner = ora('下载模板中...').start()
 
     try {
@@ -77,7 +82,7 @@ export default async (ctx: Context): Promise<void> => {
         // 解压完成后，清除temp
         await file.remove(temp)
 
-        spinner.succeed('模板下载成功')
+        spinner.succeed('模板下载成功~~\n')
     } catch (e) {
         spinner.stop()
         throw new Error(`下载模板文件${ctx.template}失败，原因是：${e.message as string}.`)

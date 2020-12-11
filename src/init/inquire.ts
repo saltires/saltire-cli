@@ -58,7 +58,7 @@ export const processor = (ctx: Context) => (item: PromptObject) => {
 }
 
 export default async (ctx: Context): Promise<void> => {
-    console.clear()
+    // console.clear()
 
     // 当prompts为空时
     if (ctx.config.prompts == null) {
