@@ -4,6 +4,7 @@ import { file } from '../core'
 import { Context } from './types'
 
 export default async (ctx: Context): Promise<void> => {
+
     // 密码验证 qishi666
     const { value } = await prompts([
         {

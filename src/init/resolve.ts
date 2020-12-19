@@ -2,6 +2,7 @@ import path from 'path'
 import crypto from 'crypto'
 import ora from 'ora'
 import chalk from 'chalk'
+import prompts from 'prompts'
 import { file, http, config } from '../core'
 import { Context } from './types'
 
@@ -43,6 +44,19 @@ export default async (ctx: Context): Promise<void> => {
         return
     }
 
+    // 询问用户是否启用 GitHub 镜像加速
+    const { value } = await prompts([
+        {
+            type: 'confirm',
+            name: 'value',
+            message: '是否启用 GitHub 镜像加速'
+        }
+    ])
+
+    if (value) {
+        config.registry = 'https://github.91chifun.workers.dev//https://github.com/{owner}/{name}/archive/{branch}.zip'
+    }
+
     // 将用户针对模板的输入格式化为完整的url地址
     const url = await getTemplateUrl(ctx.template)
 
@@ -70,7 +84,7 @@ export default async (ctx: Context): Promise<void> => {
     console.log(chalk.blue(`\n ## 开始为您下载项目模板[${ctx.template}]，这通常需要几分钟的时间!\n`))
 
     // 开始转圈...
-    const spinner = ora('下载模板中...').start()
+    // const spinner = ora('下载模板中...').start()
 
     try {
         // 使用http模板下载zip文件，temp是一个zip文件的绝对路径
@@ -82,9 +96,9 @@ export default async (ctx: Context): Promise<void> => {
         // 解压完成后，清除temp
         await file.remove(temp)
 
-        spinner.succeed('模板下载成功~~\n')
+        // spinner.succeed('模板下载成功~~\n')
     } catch (e) {
-        spinner.stop()
+        // spinner.stop()
         throw new Error(`下载模板文件${ctx.template}失败，原因是：${e.message as string}.`)
     }
 
