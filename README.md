@@ -16,7 +16,10 @@ list | 列举所有可用的模板
 模板名称 | 模板说明
 ---|---
 right-pc | 快速搭建骑士 pc 端站点
-ex | 快速搭建个人测试站点
+ex | 快速搭建个人测试站点（webpack | gulp）
+ts | 快速搭建 TypeScript 项目
+nm | 快速搭建 npm 项目
+
 
 ### 可选参数
 `saltire-cli <template name> <project name> --force || -f`

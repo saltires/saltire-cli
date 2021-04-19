@@ -8,7 +8,6 @@ cli
   .command('<template> [project]', 'Create new project from a template')
   .option('-f, --force', 'Overwrite if the target exists')
   .option('-o, --offline', 'Try to use an offline template')
-  // .allowUnknownOptions() // for prompts override.
   .example('  # with an official template')
   .example(`  $ ${name} <template> [project]`)
   .example('  # with a custom github repo')
@@ -24,8 +23,6 @@ cli
 
 cli.help().version(version).parse()
 
-// https://github.com/cacjs/cac#error-handling
-/* istanbul ignore next */
 const onError = (err: Error): void => {
   console.error(err.message)
   process.exit(1)

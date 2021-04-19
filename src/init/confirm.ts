@@ -1,5 +1,6 @@
 import path from 'path'
 import prompts from 'prompts'
+import crypto from 'crypto'
 import { file } from '../core'
 import { Context } from './types'
 
@@ -14,7 +15,7 @@ export default async (ctx: Context): Promise<void> => {
         }
     ])
 
-    if (value !== 'qishi666') throw new Error('密码错误，已取消任务')
+    if (crypto.createHash("md5").update(value).digest('hex') !== 'd021eea5e6f61ddd8b879ed33499b4de') throw new Error('密码错误，已取消任务')
 
     // 为目标项目生成绝对路径
     ctx.dest = path.resolve(ctx.project)

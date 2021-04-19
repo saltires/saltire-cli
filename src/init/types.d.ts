@@ -1,6 +1,10 @@
 // import { Stats } from 'fs'
 import { PromptObject, Answers } from 'prompts'
 
+interface Knight {
+  name: string;
+}
+
 export interface Options {
   /**
    * Force mode, overwrite if the target exists.
