@@ -2,7 +2,7 @@
 import { PromptObject, Answers } from 'prompts'
 
 interface Knight {
-  name: string;
+  name: string
 }
 
 export interface Options {
@@ -74,6 +74,10 @@ export interface Template {
    * Template all completed.
    */
   complete?: ((ctx: Context) => string | Promise<string> | Promise<void>) | string
+  /**
+   * 指定哪些文件应该不被 loadsh template 渲染
+   */
+  ignoreRender: Array<string>
 }
 
 /**

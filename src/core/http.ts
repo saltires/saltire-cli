@@ -2,7 +2,6 @@ import { join } from 'path'
 import { pipeline } from 'stream'
 import { promisify } from 'util'
 import { promises as fs, createWriteStream } from 'fs'
-import progressStream from 'progress-stream'
 import ora from 'ora'
 import fetch from 'node-fetch'
 import config from './config'
@@ -25,37 +24,15 @@ export const request = async (url: fetch.RequestInfo, init?: fetch.RequestInit):
  * @description 下载指定互联网地址的文件，并在系统中创建临时文件存放，最后返回该临时文件的地址（以流的形式）
  * @return { string }
  */
-export const downolad = async (url: string): Promise<string> => {
+ export const downolad = async (url: string): Promise<string> => {
     const response = await request(url)
 
     // 创建一个临时目录
     await fs.mkdir(config.paths.temp, { recursive: true })
     const filename = join(config.paths.temp, Date.now().toString() + '.tmp')
 
-    // 获取请求头中的文件大小数据
-    let fsize = Number(response.headers.get("content-length"));
-
-    let str = progressStream({
-        length: fsize,
-        time: 100 /* ms */
-    });
-
-    const spinner_loading = ora('进度：0%').start();
-
-    // 下载进度 
-    str.on('progress', function (progressData: AnyObject) {
-        let percentage = Math.round(progressData.percentage) + '%';
-        spinner_loading.text = '进度：' + percentage
-
-        if (progressData.percentage == 100) {
-            spinner_loading.succeed('模板下载成功~~\n')
-        }
-    });
-
-    // spinner_loading.stop()
-
     // 在管道中将 http 请求返回的内容写入到临时文件中
-    await pipe(response.body!, str, createWriteStream(filename))
+    await pipe(response.body!,createWriteStream(filename))
     return filename
 }
 

@@ -36,8 +36,8 @@ const parseIni = (filename: string): AnyObject | undefined => {
 }
 
 const defaults = {
-    registry: 'https://github.com/{owner}/{name}/archive/{branch}.zip',
-    official: 'saltire-template',
+    registry: 'https://github.com/{owner}/{name}/archive/refs/heads/{branch}.zip',
+    official: 'niocn-copier',
     branch: 'master',
     commitMessage: 'feat: initial commit'
 }
@@ -45,8 +45,8 @@ const defaults = {
 // 用户主目录 /Users/edz
 const homedir = os.homedir()
 
-// 如果用户主目录有 .saltirerc配置文件 进行解析 并覆盖默认配置
-const config = parseIni(path.join(homedir, `.saltirerc`))
+// 如果用户主目录有 .copierrc配置文件 进行解析 并覆盖默认配置
+const config = parseIni(path.join(homedir, `.copierrc`))
 
 export default {
     ...defaults,

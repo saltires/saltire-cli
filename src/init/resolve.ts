@@ -11,9 +11,9 @@ import { Context } from './types'
  * @return { string }
  * @example 
  * 1. 简称, 如. 'ex'
- * 2. 模板的全称，如. 'saltire-template/ex'
- * 3. 模板的全称并表明分支, 如. 'saltire-template/ex#develop'
- * 4. 完整的 url, 如. 'https://github.com/saltire-template/ex/archive/master.zip'
+ * 2. 模板的全称，如. 'niocn-copier/ex'
+ * 3. 模板的全称并表明分支, 如. 'niocn-copier/ex#develop'
+ * 4. 完整的 url, 如. 'https://github.com/niocn-copier/ex/archive/master.zip'
  */
 export const getTemplateUrl = async (input: string): Promise<string> => {
     // 如果是 4、完整的url，直接返回即可
@@ -54,7 +54,7 @@ export default async (ctx: Context): Promise<void> => {
     ])
 
     if (value) {
-        config.registry = 'https://github.91chifun.workers.dev//https://github.com/{owner}/{name}/archive/{branch}.zip'
+        config.registry = 'https://hub.fastgit.org/{owner}/{name}/archive/refs/heads/{branch}.zip'
     }
 
     // 将用户针对模板的输入格式化为完整的url地址
@@ -81,14 +81,16 @@ export default async (ctx: Context): Promise<void> => {
     exists && await file.remove(ctx.src)
 
     // 下载模板通常需要几分钟，这里给出提示
-    console.log(chalk.blue(`\n ## 开始为您下载项目模板[${ctx.template}]，这通常需要几分钟的时间!\n`))
+    // console.log(chalk.blue(`\n ## 开始为您下载项目模板[${ctx.template}]，这通常需要几分钟的时间!\n`))
 
     // 开始转圈...
-    // const spinner = ora('下载模板中...').start()
+    const spinner = ora('下载模板中...').start()
 
     try {
         // 使用http模板下载zip文件，temp是一个zip文件的绝对路径
         const temp = await http.downolad(url)
+
+        spinner.text = '开始解压...'
 
         // 解压zip文件到目标项目中
         await file.extract(temp, ctx.src, 1)
@@ -96,9 +98,9 @@ export default async (ctx: Context): Promise<void> => {
         // 解压完成后，清除temp
         await file.remove(temp)
 
-        // spinner.succeed('模板下载成功~~\n')
+        spinner.succeed('模板下载并解压成功~~\n')
     } catch (e) {
-        // spinner.stop()
+        spinner.stop()
         throw new Error(`下载模板文件${ctx.template}失败，原因是：${e.message as string}.`)
     }
 

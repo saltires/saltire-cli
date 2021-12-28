@@ -21,7 +21,7 @@ export default async (ctx: Context): Promise<void> => {
         const text = item.contents.toString()
 
         // 如果文件中没有模板语法，就无需调用渲染函数
-        if (!regexp.test(text)) return
+        if (!regexp.test(text) || ctx.config?.ignoreRender?.includes(item.path)) return
 
         const compiled = _.template(text, { imports })
         const newContents = compiled(ctx.answers)

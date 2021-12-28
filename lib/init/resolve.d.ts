@@ -4,9 +4,9 @@ import { Context } from './types';
  * @return { string }
  * @example
  * 1. 简称, 如. 'ex'
- * 2. 模板的全称，如. 'saltire-template/ex'
- * 3. 模板的全称并表明分支, 如. 'saltire-template/ex#develop'
- * 4. 完整的 url, 如. 'https://github.com/saltire-template/ex/archive/master.zip'
+ * 2. 模板的全称，如. 'niocn-copier/ex'
+ * 3. 模板的全称并表明分支, 如. 'niocn-copier/ex#develop'
+ * 4. 完整的 url, 如. 'https://github.com/niocn-copier/ex/archive/master.zip'
  */
 export declare const getTemplateUrl: (input: string) => Promise<string>;
 declare const _default: (ctx: Context) => Promise<void>;
