@@ -54,7 +54,7 @@ export default async (ctx: Context): Promise<void> => {
     ])
 
     if (value) {
-        config.registry = 'https://hub.fastgit.org/{owner}/{name}/archive/refs/heads/{branch}.zip'
+        config.registry = 'https://github.91chi.fun/https://github.com/{owner}/{name}/archive/refs/heads/{branch}.zip'
     }
 
     // 将用户针对模板的输入格式化为完整的url地址

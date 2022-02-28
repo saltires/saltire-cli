@@ -19,5 +19,4 @@ copier [templateName] [projectName]
 
 There are currently the following templates available for choice
 - composition-api-tsx
-- ts
 - nodecli
